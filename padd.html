@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en" data-era="tng">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LCARS PADD</title>
+  <link rel="stylesheet" href="lcars.css">
+  <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .padd {
+      width: 390px;
+      max-width: 100%;
+      min-height: 844px;
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: var(--lcars-bg);
+      border: 2px solid var(--lcars-border);
+    }
+    .padd-topbar {
+      display: flex;
+      height: 28px;
+    }
+    .padd-topbar > div:first-child { flex: 1; border-radius: 0 0 14px 0; }
+    .padd-topbar > div:last-child { flex: 1; border-radius: 0 0 0 14px; }
+    .padd-bottombar {
+      display: flex;
+      height: 28px;
+      gap: var(--lcars-bar-gap);
+    }
+    .padd-bottombar > div:first-child { border-radius: 0 14px 0 0; }
+    .padd-bottombar > div:last-child { border-radius: 14px 0 0 0; }
+    .padd-content {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .padd-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .padd-profile {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .padd-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 8px;
+      background: var(--lcars-surface);
+      border: 2px solid var(--lcars-lavender);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--lcars-font-ui);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--lcars-lavender);
+    }
+    .padd-info { display: flex; flex-direction: column; gap: 4px; }
+    .padd-fields {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .padd-field-label {
+      font-family: var(--lcars-font-ui);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--lcars-salmon);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .padd-field-value {
+      font-family: var(--lcars-font-data);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--lcars-text);
+      margin: 0;
+    }
+    .padd-actions {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="padd">
+    <div class="padd-topbar">
+      <div class="lcars-orange"></div>
+      <div class="lcars-gold" style="margin-left: 4px;"></div>
+    </div>
+
+    <div class="padd-content">
+      <div class="padd-header">
+        <h1 class="lcars-title lcars-title--md">Personnel File</h1>
+        <span class="lcars-mono lcars-text-muted" style="font-size: 12px;">SC-937-0176</span>
+      </div>
+
+      <div class="padd-profile">
+        <div class="padd-avatar">JP</div>
+        <div class="padd-info">
+          <span style="font-family: var(--lcars-font-ui); font-size: 20px; font-weight: 700; color: var(--lcars-text); letter-spacing: 0.8px;">Capt. Jean-Luc Picard</span>
+          <span style="font-family: var(--lcars-font-data); font-size: 14px; color: var(--lcars-muted);">Commanding Officer • USS Enterprise</span>
+          <span style="font-family: var(--lcars-font-data); font-size: 13px; color: var(--lcars-muted);">Human • La Barre, France, Earth</span>
+        </div>
+      </div>
+
+      <div class="lcars-panel padd-fields">
+        <div>
+          <p class="padd-field-label">Service Number</p>
+          <p class="padd-field-value">SP-937-215</p>
+        </div>
+        <div>
+          <p class="padd-field-label">Commission Date</p>
+          <p class="padd-field-value">Stardate 27283.4</p>
+        </div>
+        <div>
+          <p class="padd-field-label">Academy Class</p>
+          <p class="padd-field-value">2327</p>
+        </div>
+        <div>
+          <p class="padd-field-label">Commendations</p>
+          <p class="padd-field-value">Grankite Order of Tactics</p>
+        </div>
+        <div>
+          <p class="padd-field-label">Previous Command</p>
+          <p class="padd-field-value">USS Stargazer NCC-2893</p>
+        </div>
+        <div>
+          <p class="padd-field-label">Specialization</p>
+          <p class="padd-field-value">Archaeology • Diplomacy</p>
+        </div>
+        <div>
+          <p class="padd-field-label">Medical Status</p>
+          <p class="padd-field-value">Active Duty - Fit</p>
+        </div>
+        <div>
+          <p class="padd-field-label">Security Clearance</p>
+          <p class="padd-field-value">Level 10 - Alpha</p>
+        </div>
+      </div>
+
+      <div class="padd-actions">
+        <button class="lcars-btn lcars-btn--sm lcars-orange">Transfer</button>
+        <button class="lcars-btn lcars-btn--sm lcars-blue">Log</button>
+        <button class="lcars-btn lcars-btn--sm lcars-lavender">Archive</button>
+      </div>
+    </div>
+
+    <div class="padd-bottombar">
+      <div class="lcars-blue" style="flex: 1;"></div>
+      <div class="lcars-lavender" style="flex: 0.8;"></div>
+      <div class="lcars-african-violet" style="flex: 0.7;"></div>
+    </div>
+  </div>
+</body>
+</html>

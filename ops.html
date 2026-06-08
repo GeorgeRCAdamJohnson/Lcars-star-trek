@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en" data-era="tng">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LCARS Operations Panel</title>
+  <link rel="stylesheet" href="lcars.css">
+  <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .ops-frame {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      display: grid;
+      grid-template-areas:
+        "elbow-tl topbar elbow-tr"
+        "sidebar-l content sidebar-r"
+        "elbow-bl bottombar elbow-br";
+      grid-template-columns: 40px 1fr 40px;
+      grid-template-rows: 120px 1fr 120px;
+    }
+    .ops-elbow-tr { grid-area: elbow-tr; }
+    .ops-elbow-br { grid-area: elbow-br; }
+    .ops-sidebar-r {
+      grid-area: sidebar-r;
+      display: flex;
+      flex-direction: column;
+      gap: var(--lcars-bar-gap);
+    }
+    .ops-sidebar-l {
+      grid-area: sidebar-l;
+      display: flex;
+      flex-direction: column;
+      gap: var(--lcars-bar-gap);
+    }
+    .ops-sidebar-seg {
+      width: 100%;
+    }
+    .ops-content {
+      grid-area: content;
+      padding: var(--lcars-space-5);
+      display: flex;
+      flex-direction: column;
+      gap: var(--lcars-space-4);
+    }
+    .ops-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .ops-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="ops-frame">
+
+    <div class="lcars-elbow lcars-elbow-tl" style="grid-area: elbow-tl;">
+      <svg viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0 L160 0 L160 36 L72 36 A36 36 0 0 0 36 72 L36 120 L0 120 Z" fill="var(--lcars-gold)"/>
+      </svg>
+    </div>
+
+    <div class="lcars-elbow ops-elbow-tr">
+      <svg viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0 L160 0 L160 120 L124 120 L124 72 A36 36 0 0 0 88 36 L0 36 Z" fill="var(--lcars-tan)"/>
+      </svg>
+    </div>
+
+    <div class="lcars-topbar" style="grid-area: topbar;">
+      <div class="lcars-bar lcars-bar--flex lcars-bar--right lcars-gold">OPERATIONS</div>
+      <div class="lcars-bar lcars-bar--center lcars-orange" style="width: 240px;">USS ENTERPRISE</div>
+      <div class="lcars-bar lcars-bar--center lcars-tan" style="width: 200px;">NCC-1701-D</div>
+    </div>
+
+    <div class="ops-sidebar-l">
+      <div class="ops-sidebar-seg lcars-sidebar-seg--flex lcars-gold" style="flex:2;"></div>
+      <div class="ops-sidebar-seg lcars-orange" style="height:100px;"></div>
+      <div class="ops-sidebar-seg lcars-tan" style="height:80px;"></div>
+      <div class="ops-sidebar-seg lcars-sidebar-seg--flex lcars-lavender" style="flex:2;"></div>
+    </div>
+
+    <div class="ops-content">
+      <div class="ops-header">
+        <h1 class="lcars-title lcars-title--lg">Operations</h1>
+        <span class="lcars-subtitle lcars-mono">STARDATE 47988.1 • SECTOR 001</span>
+      </div>
+
+      <div class="ops-grid">
+        <div class="lcars-panel">
+          <h3 class="lcars-panel__title">Ship Systems</h3>
+          <div class="lcars-data-row">
+            <span class="lcars-data-row__label">Life Support</span>
+            <span class="lcars-data-row__value lcars-text-green">NOMINAL</span>
+          </div>
+          <div class="lcars-data-row">
+            <span class="lcars-data-row__label">Structural Integrity</span>
+            <span class="lcars-data-row__value lcars-text-green">99.8%</span>
+          </div>
+          <div class="lcars-data-row">
+            <span class="lcars-data-row__label">Inertial Dampeners</span>
+            <span class="lcars-data-row__value lcars-text-green">ACTIVE</span>
+          </div>
+          <div class="lcars-data-row">
+            <span class="lcars-data-row__label">Deflector Array</span>
+            <span class="lcars-data-row__value lcars-text-gold">STANDBY</span>
+          </div>
+          <div class="lcars-data-row">
+            <span class="lcars-data-row__label">Transporter Systems</span>
+            <span class="lcars-data-row__value lcars-text-green">6 ONLINE</span>
+          </div>
+          <div class="lcars-data-row">
+            <span class="lcars-data-row__label">Holodeck 1-4</span>
+            <span class="lcars-data-row__value lcars-text-blue">2 ACTIVE</span>
+          </div>
+          <div class="lcars-data-row">
+            <span class="lcars-data-row__label">Replicators</span>
+            <span class="lcars-data-row__value lcars-text-green">NOMINAL</span>
+          </div>
+          <div class="lcars-data-row">
+            <span class="lcars-data-row__label">Communications</span>
+            <span class="lcars-data-row__value lcars-text-green">ALL BANDS</span>
+          </div>
+        </div>
+
+        <div class="lcars-panel">
+          <h3 class="lcars-panel__title">Duty Roster</h3>
+          <div class="lcars-data-row">
+            <span class="lcars-data-row__label">Cdr. Riker</span>
+            <span class="lcars-data-row__value lcars-text-blue">BRIDGE</span>
+          </div>
+          <div class="lcars-data-row">
+            <span class="lcars-data-row__label">Lt. Worf</span>
+            <span class="lcars-data-row__value lcars-text-blue">TACTICAL</span>
+          </div>
+          <div class="lcars-data-row">
+            <span class="lcars-data-row__label">Lt. Data</span>
+            <span class="lcars-data-row__value lcars-text-blue">OPS</span>
+          </div>
+          <div class="lcars-data-row">
+            <span class="lcars-data-row__label">Cmdr. LaForge</span>
+            <span class="lcars-data-row__value lcars-text-blue">ENGINEERING</span>
+          </div>
+          <div class="lcars-data-row">
+            <span class="lcars-data-row__label">Dr. Crusher</span>
+            <span class="lcars-data-row__value lcars-text-blue">SICKBAY</span>
+          </div>
+        </div>
+
+        <div class="lcars-panel" style="grid-column: span 2;">
+          <h3 class="lcars-panel__title">Communications Log</h3>
+          <div class="lcars-data-row">
+            <span class="lcars-data-row__label lcars-text-blue">14:23</span>
+            <span class="lcars-data-row__value lcars-text-muted">Subspace Relay 47 - Routine Check</span>
+          </div>
+          <div class="lcars-data-row">
+            <span class="lcars-data-row__label lcars-text-blue">14:18</span>
+            <span class="lcars-data-row__value lcars-text-muted">Starbase 74 - Supply Manifest Received</span>
+          </div>
+          <div class="lcars-data-row">
+            <span class="lcars-data-row__label lcars-text-blue">14:02</span>
+            <span class="lcars-data-row__value lcars-text-gold">PRIORITY 1 - Admiral Nechayev</span>
+          </div>
+          <div class="lcars-data-row">
+            <span class="lcars-data-row__label lcars-text-blue">13:45</span>
+            <span class="lcars-data-row__value lcars-text-muted">Long Range Scan Complete - Sector 001</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ops-sidebar-r">
+      <div class="ops-sidebar-seg lcars-sidebar-seg--flex lcars-blue" style="flex:2;"></div>
+      <div class="ops-sidebar-seg lcars-african-violet" style="height:120px;"></div>
+      <div class="ops-sidebar-seg lcars-salmon" style="height:80px;"></div>
+      <div class="ops-sidebar-seg lcars-sidebar-seg--flex lcars-lavender" style="flex:3;"></div>
+    </div>
+
+    <div class="lcars-elbow lcars-elbow-bl" style="grid-area: elbow-bl;">
+      <svg viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0 L36 0 L36 48 A36 36 0 0 0 72 84 L160 84 L160 120 L0 120 Z" fill="var(--lcars-lavender)"/>
+      </svg>
+    </div>
+
+    <div class="lcars-elbow ops-elbow-br">
+      <svg viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg">
+        <path d="M124 0 L160 0 L160 120 L0 120 L0 84 L88 84 A36 36 0 0 0 124 48 Z" fill="var(--lcars-african-violet)"/>
+      </svg>
+    </div>
+
+    <div class="lcars-bottombar" style="grid-area: bottombar;">
+      <div class="lcars-bar lcars-bar--flex lcars-lavender">STARFLEET OPERATIONS</div>
+      <div class="lcars-bar lcars-bar--center lcars-blue" style="width: 240px;">FEDERATION</div>
+      <div class="lcars-bar lcars-bar--center lcars-african-violet" style="width: 200px;">UNITED PLANETS</div>
+    </div>
+
+  </div>
+</body>
+</html>

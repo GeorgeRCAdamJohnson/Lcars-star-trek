@@ -1,28 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-era="tng">
 <head>
   <meta charset="UTF-8">
-  <title>LCARS Style UI Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LCARS Interface</title>
   <link rel="stylesheet" href="lcars.css">
-  <link href="https://fonts.googleapis.com/css?family=Orbitron:700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="lcars-header">
-    <div class="lcars-elbow lcars-orange"></div>
-    <div class="lcars-bar lcars-blue"></div>
-    <div class="lcars-bar lcars-purple"></div>
-  </div>
-  <div class="lcars-content">
-    <div class="lcars-side lcars-orange"></div>
-    <div class="lcars-main">
-      <h1>Welcome to LCARS UI!</h1>
-      <p>This is a demo of the LCARS style interface inspired by Bracer Jack's tutorial.</p>
+  <div class="lcars-frame">
+
+    <!-- Top-Left Elbow -->
+    <div class="lcars-elbow lcars-elbow-tl">
+      <svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0 L160 0 L160 36 L72 36 A36 36 0 0 0 36 72 L36 120 L0 120 Z" fill="var(--lcars-orange)"/>
+      </svg>
     </div>
-    <div class="lcars-side lcars-blue"></div>
-  </div>
-  <div class="lcars-footer">
-    <div class="lcars-bar lcars-purple"></div>
-    <div class="lcars-bar lcars-orange"></div>
+
+    <!-- Top Bar -->
+    <div class="lcars-topbar">
+      <div class="lcars-bar lcars-bar--flex lcars-bar--right lcars-orange"><span class="lcars-data-noise">93 1853 24109 7 7024 322 4149</span></div>
+      <div class="lcars-bar lcars-bar--center lcars-gold" style="width: 200px;">LCARS 47</div>
+      <div class="lcars-bar lcars-bar--center lcars-african-violet" style="width: 180px;">UFP</div>
+      <div class="lcars-bar lcars-bar--end lcars-bar--center lcars-blue" style="width: 100px;">05</div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="lcars-sidebar">
+      <div class="lcars-sidebar-seg lcars-sidebar-seg--flex lcars-orange">CONN</div>
+      <div class="lcars-sidebar-seg lcars-tan" style="height: 60px;">OPS</div>
+      <div class="lcars-sidebar-seg lcars-gold" style="height: 80px;">TACTICAL</div>
+      <div class="lcars-sidebar-seg lcars-african-violet" style="height: 60px;">SCIENCE</div>
+      <div class="lcars-sidebar-seg lcars-lavender" style="height: 100px;">ENGINEERING</div>
+      <div class="lcars-sidebar-seg lcars-sidebar-seg--flex lcars-blue">MEDICAL</div>
+    </div>
+
+    <!-- Content -->
+    <div class="lcars-content">
+      <h1 class="lcars-title lcars-title--xl">LCARS Interface</h1>
+      <p class="lcars-subtitle">Library Computer Access / Retrieval System • NCC-1701-D • Stardate 47988.1</p>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; flex: 1;">
+        <div class="lcars-panel">
+          <h3 class="lcars-panel__title">Sensor Array</h3>
+          <p class="lcars-panel__value">47.293</p>
+          <p class="lcars-panel__status lcars-panel__status--ok">NOMINAL - ALL SYSTEMS ACTIVE</p>
+        </div>
+        <div class="lcars-panel">
+          <h3 class="lcars-panel__title">Warp Core</h3>
+          <p class="lcars-panel__value">1,247.8</p>
+          <p class="lcars-panel__status lcars-panel__status--ok">COCHRANE DISTORTION: 0.003%</p>
+        </div>
+        <div class="lcars-panel">
+          <h3 class="lcars-panel__title">Shield Status</h3>
+          <p class="lcars-panel__value">98.7%</p>
+          <p class="lcars-panel__status lcars-panel__status--ok">POWER RESERVE: OPTIMAL</p>
+        </div>
+      </div>
+
+      <div class="lcars-text-bar lcars-gold">
+        <span>USS Enterprise NCC-1701-D • Galaxy Class • Crew Complement: 1,014</span>
+      </div>
+
+      <div class="lcars-alert lcars-alert--blue">
+        All stations report ready. Ship operating within normal parameters.
+      </div>
+
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <button class="lcars-btn lcars-red lcars-blink-fast">Red Alert</button>
+        <button class="lcars-btn lcars-gold">Yellow Alert</button>
+        <button class="lcars-btn lcars-orange">Engage</button>
+        <button class="lcars-btn lcars-blue">Hail</button>
+        <button class="lcars-btn lcars-lavender">Scan</button>
+      </div>
+    </div>
+
+    <!-- Bottom-Left Elbow -->
+    <div class="lcars-elbow lcars-elbow-bl">
+      <svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0 L36 0 L36 48 A36 36 0 0 0 72 84 L160 84 L160 120 L0 120 Z" fill="var(--lcars-blue)"/>
+      </svg>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="lcars-bottombar">
+      <div class="lcars-bar lcars-bar--flex lcars-blue">STARFLEET COMMAND</div>
+      <div class="lcars-bar lcars-bar--center lcars-lavender" style="width: 200px;">22-4786</div>
+      <div class="lcars-bar lcars-bar--center lcars-african-violet" style="width: 160px;">SEC 31</div>
+      <div class="lcars-bar lcars-bar--end lcars-bar--center lcars-salmon" style="width: 100px;">09</div>
+    </div>
+
   </div>
 </body>
 </html>
