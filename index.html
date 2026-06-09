@@ -10,10 +10,11 @@
 <body>
   <div class="lcars-frame">
 
-    <!-- Top-Left Elbow -->
+    <!-- Top-Left Elbow: full sidebar width, bar extends right, inner curve at corner -->
     <div class="lcars-elbow lcars-elbow-tl">
       <svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 0 L160 0 L160 36 L72 36 A36 36 0 0 0 36 72 L36 120 L0 120 Z" fill="var(--lcars-orange)"/>
+        <!-- Solid block: full width top bar + full height sidebar column, inner curve cutout -->
+        <path d="M0 0 H160 V36 H108 A72 84 0 0 0 36 120 H0 Z" fill="var(--lcars-orange)"/>
       </svg>
     </div>
 
@@ -83,10 +84,10 @@
       </div>
     </div>
 
-    <!-- Bottom-Left Elbow -->
+    <!-- Bottom-Left Elbow: full sidebar width, bar extends right, inner curve at corner -->
     <div class="lcars-elbow lcars-elbow-bl">
       <svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 0 L36 0 L36 48 A36 36 0 0 0 72 84 L160 84 L160 120 L0 120 Z" fill="var(--lcars-blue)"/>
+        <path d="M0 0 H36 A72 84 0 0 0 108 84 H160 V120 H0 Z" fill="var(--lcars-blue)"/>
       </svg>
     </div>
 
