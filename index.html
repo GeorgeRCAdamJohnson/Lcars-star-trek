@@ -40,6 +40,14 @@
       <h1 class="lcars-title lcars-title--xl">LCARS Interface</h1>
       <p class="lcars-subtitle">Library Computer Access / Retrieval System • NCC-1701-D • Stardate 47988.1</p>
 
+      <!-- Era Selector -->
+      <div style="display: flex; gap: 4px; align-items: center;">
+        <span style="font-family: var(--lcars-font-ui); font-size: 13px; color: var(--lcars-muted); letter-spacing: 1px; margin-right: 8px;">VESSEL DATABASE:</span>
+        <button class="lcars-btn lcars-btn--sm lcars-orange" onclick="setEra('tng')">NCC-1701-D</button>
+        <button class="lcars-btn lcars-btn--sm lcars-blue" onclick="setEra('voy')">NCC-74656</button>
+        <button class="lcars-btn lcars-btn--sm lcars-lavender" onclick="setEra('ds9')">NX-74205</button>
+      </div>
+
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; flex: 1;">
         <div class="lcars-panel">
           <h3 class="lcars-panel__title">Sensor Array</h3>
@@ -91,5 +99,23 @@
     </div>
 
   </div>
+
+  <script>
+    const ships = {
+      tng: { name: 'USS ENTERPRISE', reg: 'NCC-1701-D', class: 'Galaxy Class', crew: '1,014', stardate: '47988.1' },
+      voy: { name: 'USS VOYAGER', reg: 'NCC-74656', class: 'Intrepid Class', crew: '141', stardate: '51268.4' },
+      ds9: { name: 'USS DEFIANT', reg: 'NX-74205', class: 'Defiant Class', crew: '50', stardate: '50564.2' }
+    };
+
+    function setEra(era) {
+      document.documentElement.setAttribute('data-era', era);
+      const ship = ships[era];
+      document.querySelector('.lcars-title--xl').textContent = 'LCARS INTERFACE';
+      document.querySelector('.lcars-subtitle').textContent =
+        `Library Computer Access / Retrieval System • ${ship.reg} • Stardate ${ship.stardate}`;
+      document.querySelector('.lcars-text-bar span').textContent =
+        `${ship.name} ${ship.reg} • ${ship.class} • Crew Complement: ${ship.crew}`;
+    }
+  </script>
 </body>
 </html>
