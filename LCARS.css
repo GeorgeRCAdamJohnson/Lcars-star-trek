@@ -177,6 +177,40 @@ body {
   gap: 0;
 }
 
+/* Top bar area gets elbow's background so the curve reads correctly */
+.lcars-topbar {
+  grid-area: topbar;
+  display: flex;
+  gap: var(--lcars-bar-gap);
+  align-items: flex-start;
+  height: 120px;
+  background: var(--lcars-orange);
+  padding-top: 0;
+}
+
+.lcars-bottombar {
+  grid-area: bottombar;
+  display: flex;
+  gap: var(--lcars-bar-gap);
+  align-items: flex-end;
+  height: 120px;
+  background: var(--lcars-blue);
+}
+
+/* Content area overlaps with rounded corner to create the LCARS cutout */
+.lcars-content {
+  grid-area: content;
+  padding: var(--lcars-space-5) var(--lcars-space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--lcars-space-5);
+  background: var(--lcars-bg);
+  border-radius: 72px 0 0 72px;
+  margin-top: -84px;
+  margin-bottom: -84px;
+  z-index: 1;
+}
+
 /* === ELBOWS === */
 .lcars-elbow {
   width: var(--lcars-sidebar-width);
@@ -192,27 +226,11 @@ body {
 }
 
 /* === TOP BAR === */
-.lcars-topbar {
-  grid-area: topbar;
-  display: flex;
-  gap: var(--lcars-bar-gap);
-  align-items: flex-start;
-  height: 120px;
-}
-
 .lcars-topbar .lcars-bar {
   height: var(--lcars-bar-height);
 }
 
 /* === BOTTOM BAR === */
-.lcars-bottombar {
-  grid-area: bottombar;
-  display: flex;
-  gap: var(--lcars-bar-gap);
-  align-items: flex-end;
-  height: 120px;
-}
-
 .lcars-bottombar .lcars-bar {
   height: var(--lcars-bar-height);
 }
@@ -263,18 +281,6 @@ body {
 }
 
 .lcars-sidebar-seg--flex { flex: 1; }
-
-/* === CONTENT AREA === */
-.lcars-content {
-  grid-area: content;
-  padding: var(--lcars-space-5) var(--lcars-space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--lcars-space-5);
-  background: var(--lcars-bg);
-  border-radius: 72px 0 0 72px;
-}
-}
 
 /* === PANELS === */
 .lcars-panel {
