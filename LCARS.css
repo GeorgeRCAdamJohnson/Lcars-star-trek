@@ -200,10 +200,17 @@ body {
 .lcars-content {
   grid-area: content;
   padding: var(--lcars-space-5) var(--lcars-space-6);
+  padding-top: 96px;
+  padding-bottom: 96px;
   display: flex;
   flex-direction: column;
   gap: var(--lcars-space-5);
   background: var(--lcars-bg);
+  border-radius: 72px 0 0 72px;
+  margin-top: -84px;
+  margin-bottom: -84px;
+  position: relative;
+  z-index: 1;
 }
 
 /* === ELBOWS === */
@@ -227,10 +234,9 @@ body {
   height: var(--lcars-bar-height);
 }
 
-/* First bar connects to elbow - make it taller with inner curve */
+/* First bar connects to elbow - full height, no inner curve here */
 .lcars-topbar .lcars-bar:first-child {
   height: 120px;
-  border-radius: 0 0 0 72px;
   align-self: stretch;
 }
 
@@ -239,10 +245,9 @@ body {
   height: var(--lcars-bar-height);
 }
 
-/* First bar connects to elbow - make it taller with inner curve */
+/* First bar connects to elbow - full height, no inner curve here */
 .lcars-bottombar .lcars-bar:first-child {
   height: 120px;
-  border-radius: 0 72px 0 0;
   align-self: stretch;
 }
 
