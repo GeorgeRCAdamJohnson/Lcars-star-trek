@@ -177,7 +177,7 @@ body {
   gap: 0;
 }
 
-/* Top bar area gets elbow's background so the curve reads correctly */
+/* Top bar area */
 .lcars-topbar {
   grid-area: topbar;
   display: flex;
@@ -185,6 +185,8 @@ body {
   align-items: flex-start;
   height: 120px;
   background: transparent;
+  position: relative;
+  z-index: 2;
 }
 
 .lcars-bottombar {
@@ -194,6 +196,8 @@ body {
   align-items: flex-end;
   height: 120px;
   background: transparent;
+  position: relative;
+  z-index: 2;
 }
 
 /* Content area overlaps with rounded corner to create the LCARS cutout */
