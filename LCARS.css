@@ -108,6 +108,60 @@ body {
   overflow-x: hidden;
 }
 
+/* === SCI-FI OVERLAY EFFECTS === */
+.lcars-frame::before,
+.lcars-frame::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Blue holographic sweep */
+.lcars-frame::before {
+  background: linear-gradient(
+    108deg,
+    transparent 0% 38%,
+    color-mix(in srgb, var(--lcars-blue) 12%, transparent) 45%,
+    color-mix(in srgb, var(--lcars-blue) 6%, transparent) 52%,
+    transparent 58% 100%
+  );
+  mix-blend-mode: screen;
+  animation: lcars-sweep 10s linear infinite;
+}
+
+/* Subtle scanlines */
+.lcars-frame::after {
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(120, 180, 255, 0.03) 0px,
+    rgba(120, 180, 255, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.6;
+}
+
+/* Edge vignette for CRT depth */
+.lcars-frame {
+  box-shadow: inset 0 0 120px 40px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes lcars-sweep {
+  0% { transform: translateX(-60%); }
+  100% { transform: translateX(60%); }
+}
+
+/* Disable overlay effects if user prefers reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .lcars-frame::before {
+    animation: none;
+    opacity: 0.5;
+    transform: none;
+  }
+}
+
 /* === SCREEN FRAME === */
 .lcars-frame {
   position: relative;
