@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-export type Era = 'tng' | 'voy' | 'ds9';
+export type Era = 'tng' | 'voy' | 'ds9' | 'hicon' | 'midnight' | 'neon' | 'frost' | 'ember';
 
 /* --- Sub-components (compound pattern) --- */
 

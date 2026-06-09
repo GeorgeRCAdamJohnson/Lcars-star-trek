@@ -98,6 +98,96 @@
   --lcars-text: #EFE6F5;
 }
 
+/* === ULTRA MODERN SPIN: High Contrast === */
+[data-era="hicon"] {
+  --lcars-bg: #000000;
+  --lcars-surface: #0A0A0A;
+  --lcars-border: #333333;
+  --lcars-text: #FFFFFF;
+  --lcars-muted: #999999;
+  --lcars-orange: #FF6600;
+  --lcars-gold: #FFD000;
+  --lcars-tan: #FFB84D;
+  --lcars-salmon: #FF4466;
+  --lcars-red: #FF0033;
+  --lcars-blue: #00AAFF;
+  --lcars-lavender: #AA66FF;
+  --lcars-african-violet: #CC44FF;
+  --lcars-green: #00FF88;
+}
+
+/* === ULTRA MODERN SPIN: Midnight === */
+[data-era="midnight"] {
+  --lcars-bg: #060612;
+  --lcars-surface: #0D0D24;
+  --lcars-border: #1A1A40;
+  --lcars-text: #E0E8FF;
+  --lcars-muted: #7080AA;
+  --lcars-orange: #4488FF;
+  --lcars-gold: #66BBFF;
+  --lcars-tan: #3366CC;
+  --lcars-salmon: #8888FF;
+  --lcars-red: #FF4488;
+  --lcars-blue: #44DDFF;
+  --lcars-lavender: #6644FF;
+  --lcars-african-violet: #9944FF;
+  --lcars-green: #44FFAA;
+}
+
+/* === ULTRA MODERN SPIN: Neon === */
+[data-era="neon"] {
+  --lcars-bg: #0A000A;
+  --lcars-surface: #120018;
+  --lcars-border: #2A0040;
+  --lcars-text: #F0E0FF;
+  --lcars-muted: #AA88CC;
+  --lcars-orange: #FF00AA;
+  --lcars-gold: #FFDD00;
+  --lcars-tan: #FF8800;
+  --lcars-salmon: #FF0066;
+  --lcars-red: #FF0044;
+  --lcars-blue: #00FFFF;
+  --lcars-lavender: #CC00FF;
+  --lcars-african-violet: #FF00FF;
+  --lcars-green: #00FF66;
+}
+
+/* === ULTRA MODERN SPIN: Frost === */
+[data-era="frost"] {
+  --lcars-bg: #F0F4F8;
+  --lcars-surface: #FFFFFF;
+  --lcars-border: #D0D8E0;
+  --lcars-text: #1A2030;
+  --lcars-muted: #606878;
+  --lcars-orange: #E86830;
+  --lcars-gold: #D4960C;
+  --lcars-tan: #B08040;
+  --lcars-salmon: #D04060;
+  --lcars-red: #CC2244;
+  --lcars-blue: #2266CC;
+  --lcars-lavender: #6644AA;
+  --lcars-african-violet: #8833CC;
+  --lcars-green: #1A8855;
+}
+
+/* === ULTRA MODERN SPIN: Ember === */
+[data-era="ember"] {
+  --lcars-bg: #0C0400;
+  --lcars-surface: #1A0A00;
+  --lcars-border: #3D1A00;
+  --lcars-text: #FFE8D0;
+  --lcars-muted: #CC9966;
+  --lcars-orange: #FF4400;
+  --lcars-gold: #FF8800;
+  --lcars-tan: #FFAA44;
+  --lcars-salmon: #FF6644;
+  --lcars-red: #FF2200;
+  --lcars-blue: #FF6600;
+  --lcars-lavender: #FF8844;
+  --lcars-african-violet: #FFAA00;
+  --lcars-green: #FFCC00;
+}
+
 /* === BODY === */
 body {
   margin: 0;

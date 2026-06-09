@@ -10,7 +10,7 @@ export interface UseEraReturn {
   nextEra: () => void;
 }
 
-const ERA_ORDER: Era[] = ['tng', 'voy', 'ds9'];
+const ERA_ORDER: Era[] = ['tng', 'voy', 'ds9', 'hicon', 'midnight', 'neon', 'frost', 'ember'];
 
 /**
  * Hook for managing the LCARS era state.
