@@ -11,6 +11,10 @@ import {
   LcarsAlert,
   LcarsDataRow,
   LcarsClock,
+  LcarsLoadingBar,
+  LcarsSpinner,
+  LcarsScanner,
+  LcarsWaveform,
   useAutoMode,
   useEra,
 } from './index';
@@ -163,13 +167,24 @@ const App: React.FC = () => {
             <LcarsPanel title="Impulse" value="FULL" status="READY" statusType="ok" />
             <LcarsPanel title="Dilithium" value="94.2%" status="ALIGNED" statusType="ok" />
           </div>
-          <LcarsPanel title="Power Distribution" style={{ flex: 1 }}>
-            <LcarsDataRow label="EPS Grid" value="NOMINAL" valueColor="green" />
-            <LcarsDataRow label="Antimatter Containment" value="STABLE" valueColor="green" />
-            <LcarsDataRow label="Warp Field Geometry" value="SYMMETRIC" valueColor="green" />
-            <LcarsDataRow label="Coolant System" value="CIRCULATING" valueColor="green" />
-            <LcarsDataRow label="Fusion Reactors" value="4/4 ONLINE" valueColor="green" />
-          </LcarsPanel>
+
+          <div style={{ display: 'flex', gap: 24, alignItems: 'center' }}>
+            <LcarsSpinner variant="ring" color="orange" size={40} />
+            <LcarsSpinner variant="pulse" color="blue" size={40} />
+            <LcarsSpinner variant="scan" color="lavender" size={40} />
+            <LcarsLoadingBar progress={72} color="orange" label="EPS CONDUIT FLOW" />
+          </div>
+
+          <div style={{ display: 'flex', gap: 16 }}>
+            <LcarsScanner variant="radar" color="blue" height={160} width="50%" label="SUBSPACE FIELD" speed="slow" />
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 8 }}>
+              <LcarsLoadingBar progress={94} color="gold" label="ANTIMATTER CONTAINMENT" />
+              <LcarsLoadingBar progress={67} color="blue" label="PLASMA INJECTION" />
+              <LcarsLoadingBar color="lavender" label="FIELD CALIBRATION" />
+              <LcarsWaveform color="orange" bars={32} height={40} />
+            </div>
+          </div>
+
           <LcarsTextBar color="orange">WARP CAPABILITY: MAX WARP 9.6 — CRUISE WARP 6</LcarsTextBar>
         </LcarsScreen>
 

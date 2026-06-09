@@ -34,6 +34,9 @@ export type { LcarsDataRowProps, ValueColor } from './components/LcarsDataRow';
 export { LcarsClock } from './components/LcarsClock';
 export type { LcarsClockProps } from './components/LcarsClock';
 
+export { LcarsLoadingBar, LcarsSpinner, LcarsScanner, LcarsWaveform } from './components/LcarsLoader';
+export type { LcarsLoadingBarProps, LcarsSpinnerProps, LcarsScannerProps, LcarsWaveformProps, SpinnerVariant, ScannerVariant } from './components/LcarsLoader';
+
 export { useAutoMode } from './hooks/useAutoMode';
 export type { UseAutoModeOptions, UseAutoModeReturn } from './hooks/useAutoMode';
 
