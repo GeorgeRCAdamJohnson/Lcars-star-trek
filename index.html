@@ -18,6 +18,15 @@
     .lcars-log-entry:last-child { border-bottom: none; }
     .lcars-log-time { font-family: var(--lcars-font-data); font-size: 13px; font-weight: 700; color: var(--lcars-blue); min-width: 42px; }
     .lcars-log-msg { font-family: var(--lcars-font-data); font-size: 13px; color: var(--lcars-text); }
+    /* Status ticker */
+    .lcars-ticker { font-family: var(--lcars-font-data); font-size: 12px; color: var(--lcars-muted); letter-spacing: 0.5px; display: flex; gap: 16px; align-items: center; }
+    .lcars-ticker .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--lcars-green); animation: lcars-pulse 2s ease infinite; }
+    @keyframes lcars-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    /* Stardate clock */
+    .lcars-clock { font-family: var(--lcars-font-data); font-size: 14px; font-weight: 700; color: var(--lcars-orange); letter-spacing: 0.5px; font-variant-numeric: tabular-nums; }
+    /* Auto-mode indicator */
+    .lcars-auto-indicator { font-family: var(--lcars-font-ui); font-size: 11px; color: var(--lcars-gold); letter-spacing: 1px; opacity: 0; transition: opacity 0.3s; }
+    .lcars-auto-indicator.visible { opacity: 1; }
   </style>
 </head>
 <body>
@@ -49,8 +58,14 @@
 
       <!-- CONN Screen (default) -->
       <div class="lcars-screen active" id="screen-conn">
-        <h1 class="lcars-title lcars-title--xl">LCARS Interface</h1>
-        <p class="lcars-subtitle">Library Computer Access / Retrieval System • <span class="ship-reg">NCC-1701-D</span> • Stardate <span class="ship-stardate">47988.1</span></p>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h1 class="lcars-title lcars-title--xl">LCARS Interface</h1>
+          <div style="display:flex; gap:16px; align-items:center;">
+            <span class="lcars-auto-indicator" id="autoIndicator">AUTO MODE</span>
+            <span class="lcars-clock" id="stardateClock">00000.0</span>
+          </div>
+        </div>
+        <div class="lcars-ticker"><span class="dot"></span> DATA CHANNEL OPEN • <span class="ship-reg">NCC-1701-D</span> • STARDATE <span class="ship-stardate">47988.1</span> • SYSTEM NOMINAL</div>
 
         <div style="display: flex; gap: 4px; align-items: center;">
           <span style="font-family: var(--lcars-font-ui); font-size: 13px; color: var(--lcars-muted); letter-spacing: 1px; margin-right: 8px;">VESSEL DATABASE:</span>
@@ -270,21 +285,92 @@
       ds9: { name: 'USS DEFIANT', reg: 'NX-74205', class: 'Defiant Class', crew: '50', stardate: '50564.2' }
     };
 
+    const screens = ['conn', 'ops', 'tactical', 'science', 'engineering', 'medical'];
+    let autoMode = false;
+    let autoTimer = null;
+    let idleTimer = null;
+    const IDLE_TIMEOUT = 30000; // 30s idle before auto-mode kicks in
+
     function setEra(era) {
       document.documentElement.setAttribute('data-era', era);
       const ship = ships[era];
-      document.querySelector('.ship-reg').textContent = ship.reg;
-      document.querySelector('.ship-stardate').textContent = ship.stardate;
+      document.querySelectorAll('.ship-reg').forEach(el => el.textContent = ship.reg);
+      document.querySelectorAll('.ship-stardate').forEach(el => el.textContent = ship.stardate);
       document.querySelector('.ship-info').textContent =
         `${ship.name} ${ship.reg} • ${ship.class} • CREW: ${ship.crew}`;
+      resetIdle();
     }
 
     function showScreen(id) {
       document.querySelectorAll('.lcars-screen').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.lcars-sidebar-seg').forEach(s => s.classList.remove('active'));
       document.getElementById('screen-' + id).classList.add('active');
-      event.currentTarget.classList.add('active');
+      const segs = document.querySelectorAll('.lcars-sidebar-seg');
+      const idx = screens.indexOf(id);
+      if (idx >= 0 && segs[idx]) segs[idx].classList.add('active');
+      resetIdle();
     }
+
+    // Live stardate clock
+    function updateClock() {
+      const now = new Date();
+      // TNG-style stardate: loosely based on year + day fraction
+      const year = now.getFullYear();
+      const start = new Date(year, 0, 0);
+      const diff = now - start;
+      const day = diff / 86400000;
+      const stardate = ((year - 2323) * 1000 + day * 1000 / 365.25).toFixed(1);
+      document.getElementById('stardateClock').textContent = stardate;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Auto-mode: cycles screens when idle
+    function startAutoMode() {
+      if (autoMode) return;
+      autoMode = true;
+      document.getElementById('autoIndicator').classList.add('visible');
+      let currentIdx = 0;
+      autoTimer = setInterval(() => {
+        currentIdx = (currentIdx + 1) % screens.length;
+        showScreen(screens[currentIdx]);
+      }, 5000);
+    }
+
+    function stopAutoMode() {
+      if (!autoMode) return;
+      autoMode = false;
+      document.getElementById('autoIndicator').classList.remove('visible');
+      clearInterval(autoTimer);
+    }
+
+    function resetIdle() {
+      stopAutoMode();
+      clearTimeout(idleTimer);
+      idleTimer = setTimeout(startAutoMode, IDLE_TIMEOUT);
+    }
+
+    // Reset idle on any interaction
+    document.addEventListener('mousemove', resetIdle);
+    document.addEventListener('keydown', resetIdle);
+    document.addEventListener('click', resetIdle);
+    resetIdle();
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'f' || e.key === 'F') {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen();
+        } else {
+          document.exitFullscreen();
+        }
+      }
+      // Number keys 1-6 for screens
+      const num = parseInt(e.key);
+      if (num >= 1 && num <= 6) {
+        showScreen(screens[num - 1]);
+      }
+    });
   </script>
 </body>
 </html>
