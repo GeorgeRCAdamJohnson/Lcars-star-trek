@@ -10,11 +10,11 @@
 <body>
   <div class="lcars-frame">
 
-    <!-- Top-Left Elbow: full sidebar width, bar extends right, inner curve at corner -->
+    <!-- Top-Left Elbow: solid block, smooth inner curve -->
     <div class="lcars-elbow lcars-elbow-tl">
-      <svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Solid block: full width top bar + full height sidebar column, inner curve cutout -->
-        <path d="M0 0 H160 V36 H108 A72 84 0 0 0 36 120 H0 Z" fill="var(--lcars-orange)"/>
+      <svg viewBox="0 0 160 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Full rectangle with quarter-ellipse carved from bottom-right corner -->
+        <path d="M0 0 H160 V36 H120 Q36 36 36 120 H0 Z" fill="var(--lcars-orange)"/>
       </svg>
     </div>
 
@@ -84,10 +84,10 @@
       </div>
     </div>
 
-    <!-- Bottom-Left Elbow: full sidebar width, bar extends right, inner curve at corner -->
+    <!-- Bottom-Left Elbow: solid block, smooth inner curve -->
     <div class="lcars-elbow lcars-elbow-bl">
-      <svg viewBox="0 0 160 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0 0 H36 A72 84 0 0 0 108 84 H160 V120 H0 Z" fill="var(--lcars-blue)"/>
+      <svg viewBox="0 0 160 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 0 H36 Q36 84 120 84 H160 V120 H0 Z" fill="var(--lcars-blue)"/>
       </svg>
     </div>
 
