@@ -6,6 +6,19 @@
   <title>LCARS Interface</title>
   <link rel="stylesheet" href="lcars.css">
   <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .lcars-screen { display: none; flex-direction: column; gap: 20px; }
+    .lcars-screen.active { display: flex; }
+    .lcars-sidebar-seg { cursor: pointer; transition: filter 0.15s; }
+    .lcars-sidebar-seg:hover { filter: brightness(1.2); }
+    .lcars-sidebar-seg.active { outline: 2px solid var(--lcars-text); outline-offset: -2px; }
+    .lcars-kpi { display: flex; gap: 16px; }
+    .lcars-kpi > .lcars-panel { flex: 1; }
+    .lcars-log-entry { display: flex; gap: 12px; align-items: baseline; padding: 4px 0; border-bottom: 1px solid var(--lcars-border); }
+    .lcars-log-entry:last-child { border-bottom: none; }
+    .lcars-log-time { font-family: var(--lcars-font-data); font-size: 13px; font-weight: 700; color: var(--lcars-blue); min-width: 42px; }
+    .lcars-log-msg { font-family: var(--lcars-font-data); font-size: 13px; color: var(--lcars-text); }
+  </style>
 </head>
 <body>
   <div class="lcars-frame">
@@ -23,60 +36,218 @@
 
     <!-- Sidebar -->
     <div class="lcars-sidebar">
-      <div class="lcars-sidebar-seg lcars-sidebar-seg--flex lcars-orange">CONN</div>
-      <div class="lcars-sidebar-seg lcars-tan" style="height: 60px;">OPS</div>
-      <div class="lcars-sidebar-seg lcars-gold" style="height: 80px;">TACTICAL</div>
-      <div class="lcars-sidebar-seg lcars-african-violet" style="height: 60px;">SCIENCE</div>
-      <div class="lcars-sidebar-seg lcars-lavender" style="height: 100px;">ENGINEERING</div>
-      <div class="lcars-sidebar-seg lcars-sidebar-seg--flex lcars-blue">MEDICAL</div>
+      <div class="lcars-sidebar-seg lcars-sidebar-seg--flex lcars-orange active" onclick="showScreen('conn')">CONN</div>
+      <div class="lcars-sidebar-seg lcars-tan" style="height: 60px;" onclick="showScreen('ops')">OPS</div>
+      <div class="lcars-sidebar-seg lcars-gold" style="height: 80px;" onclick="showScreen('tactical')">TACTICAL</div>
+      <div class="lcars-sidebar-seg lcars-african-violet" style="height: 60px;" onclick="showScreen('science')">SCIENCE</div>
+      <div class="lcars-sidebar-seg lcars-lavender" style="height: 100px;" onclick="showScreen('engineering')">ENGINEERING</div>
+      <div class="lcars-sidebar-seg lcars-sidebar-seg--flex lcars-blue" onclick="showScreen('medical')">MEDICAL</div>
     </div>
 
     <!-- Content -->
     <div class="lcars-content">
-      <h1 class="lcars-title lcars-title--xl">LCARS Interface</h1>
-      <p class="lcars-subtitle">Library Computer Access / Retrieval System • NCC-1701-D • Stardate 47988.1</p>
 
-      <!-- Era Selector -->
-      <div style="display: flex; gap: 4px; align-items: center;">
-        <span style="font-family: var(--lcars-font-ui); font-size: 13px; color: var(--lcars-muted); letter-spacing: 1px; margin-right: 8px;">VESSEL DATABASE:</span>
-        <button class="lcars-btn lcars-btn--sm lcars-orange" onclick="setEra('tng')">NCC-1701-D</button>
-        <button class="lcars-btn lcars-btn--sm lcars-blue" onclick="setEra('voy')">NCC-74656</button>
-        <button class="lcars-btn lcars-btn--sm lcars-lavender" onclick="setEra('ds9')">NX-74205</button>
-      </div>
+      <!-- CONN Screen (default) -->
+      <div class="lcars-screen active" id="screen-conn">
+        <h1 class="lcars-title lcars-title--xl">LCARS Interface</h1>
+        <p class="lcars-subtitle">Library Computer Access / Retrieval System • <span class="ship-reg">NCC-1701-D</span> • Stardate <span class="ship-stardate">47988.1</span></p>
 
-      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; flex: 1;">
-        <div class="lcars-panel">
-          <h3 class="lcars-panel__title">Sensor Array</h3>
-          <p class="lcars-panel__value">47.293</p>
-          <p class="lcars-panel__status lcars-panel__status--ok">NOMINAL - ALL SYSTEMS ACTIVE</p>
+        <div style="display: flex; gap: 4px; align-items: center;">
+          <span style="font-family: var(--lcars-font-ui); font-size: 13px; color: var(--lcars-muted); letter-spacing: 1px; margin-right: 8px;">VESSEL DATABASE:</span>
+          <button class="lcars-btn lcars-btn--sm lcars-orange" onclick="setEra('tng')">NCC-1701-D</button>
+          <button class="lcars-btn lcars-btn--sm lcars-blue" onclick="setEra('voy')">NCC-74656</button>
+          <button class="lcars-btn lcars-btn--sm lcars-lavender" onclick="setEra('ds9')">NX-74205</button>
         </div>
-        <div class="lcars-panel">
-          <h3 class="lcars-panel__title">Warp Core</h3>
-          <p class="lcars-panel__value">1,247.8</p>
-          <p class="lcars-panel__status lcars-panel__status--ok">COCHRANE DISTORTION: 0.003%</p>
+
+        <div class="lcars-kpi">
+          <div class="lcars-panel">
+            <h3 class="lcars-panel__title">Sensor Array</h3>
+            <p class="lcars-panel__value">47.293</p>
+            <p class="lcars-panel__status lcars-panel__status--ok">NOMINAL</p>
+          </div>
+          <div class="lcars-panel">
+            <h3 class="lcars-panel__title">Warp Core</h3>
+            <p class="lcars-panel__value">1,247.8</p>
+            <p class="lcars-panel__status lcars-panel__status--ok">STABLE</p>
+          </div>
+          <div class="lcars-panel">
+            <h3 class="lcars-panel__title">Shields</h3>
+            <p class="lcars-panel__value">98.7%</p>
+            <p class="lcars-panel__status lcars-panel__status--ok">OPTIMAL</p>
+          </div>
         </div>
-        <div class="lcars-panel">
-          <h3 class="lcars-panel__title">Shield Status</h3>
-          <p class="lcars-panel__value">98.7%</p>
-          <p class="lcars-panel__status lcars-panel__status--ok">POWER RESERVE: OPTIMAL</p>
+
+        <div class="lcars-text-bar lcars-gold">
+          <span class="ship-info">USS ENTERPRISE NCC-1701-D • GALAXY CLASS • CREW: 1,014</span>
+        </div>
+
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <button class="lcars-btn lcars-red lcars-blink-fast">Red Alert</button>
+          <button class="lcars-btn lcars-gold">Yellow Alert</button>
+          <button class="lcars-btn lcars-orange">Engage</button>
+          <button class="lcars-btn lcars-blue">Hail</button>
+          <button class="lcars-btn lcars-lavender">Scan</button>
         </div>
       </div>
 
-      <div class="lcars-text-bar lcars-gold">
-        <span>USS Enterprise NCC-1701-D • Galaxy Class • Crew Complement: 1,014</span>
+      <!-- OPS Screen -->
+      <div class="lcars-screen" id="screen-ops">
+        <h1 class="lcars-title lcars-title--lg">Operations</h1>
+        <p class="lcars-subtitle">Ship Systems Status • All Decks Reporting</p>
+
+        <div class="lcars-panel" style="flex:1;">
+          <h3 class="lcars-panel__title">System Status</h3>
+          <div class="lcars-data-row"><span class="lcars-data-row__label">Life Support</span><span class="lcars-data-row__value lcars-text-green">NOMINAL</span></div>
+          <div class="lcars-data-row"><span class="lcars-data-row__label">Structural Integrity</span><span class="lcars-data-row__value lcars-text-green">99.8%</span></div>
+          <div class="lcars-data-row"><span class="lcars-data-row__label">Inertial Dampeners</span><span class="lcars-data-row__value lcars-text-green">ACTIVE</span></div>
+          <div class="lcars-data-row"><span class="lcars-data-row__label">Deflector Array</span><span class="lcars-data-row__value lcars-text-gold">STANDBY</span></div>
+          <div class="lcars-data-row"><span class="lcars-data-row__label">Transporters</span><span class="lcars-data-row__value lcars-text-green">6 ONLINE</span></div>
+          <div class="lcars-data-row"><span class="lcars-data-row__label">Replicators</span><span class="lcars-data-row__value lcars-text-green">NOMINAL</span></div>
+          <div class="lcars-data-row"><span class="lcars-data-row__label">Communications</span><span class="lcars-data-row__value lcars-text-green">ALL BANDS</span></div>
+        </div>
+
+        <div class="lcars-alert lcars-alert--blue">All stations report ready.</div>
       </div>
 
-      <div class="lcars-alert lcars-alert--blue">
-        All stations report ready. Ship operating within normal parameters.
+      <!-- TACTICAL Screen -->
+      <div class="lcars-screen" id="screen-tactical">
+        <h1 class="lcars-title lcars-title--lg">Tactical</h1>
+        <p class="lcars-subtitle">Weapons & Defense Systems</p>
+
+        <div class="lcars-kpi">
+          <div class="lcars-panel">
+            <h3 class="lcars-panel__title">Phaser Banks</h3>
+            <p class="lcars-panel__value">12/12</p>
+            <p class="lcars-panel__status lcars-panel__status--ok">CHARGED</p>
+          </div>
+          <div class="lcars-panel">
+            <h3 class="lcars-panel__title">Torpedo Bay</h3>
+            <p class="lcars-panel__value">275</p>
+            <p class="lcars-panel__status lcars-panel__status--ok">LOADED</p>
+          </div>
+          <div class="lcars-panel">
+            <h3 class="lcars-panel__title">Shield Grid</h3>
+            <p class="lcars-panel__value">100%</p>
+            <p class="lcars-panel__status lcars-panel__status--ok">ALL SECTORS</p>
+          </div>
+        </div>
+
+        <div class="lcars-panel" style="flex:1;">
+          <h3 class="lcars-panel__title">Threat Assessment</h3>
+          <div class="lcars-data-row"><span class="lcars-data-row__label">Long Range Scan</span><span class="lcars-data-row__value lcars-text-green">CLEAR</span></div>
+          <div class="lcars-data-row"><span class="lcars-data-row__label">Short Range Scan</span><span class="lcars-data-row__value lcars-text-green">CLEAR</span></div>
+          <div class="lcars-data-row"><span class="lcars-data-row__label">Alert Status</span><span class="lcars-data-row__value lcars-text-green">CONDITION GREEN</span></div>
+        </div>
+
+        <div style="display:flex; gap:12px;">
+          <button class="lcars-btn lcars-red">Red Alert</button>
+          <button class="lcars-btn lcars-gold">Shields Up</button>
+          <button class="lcars-btn lcars-orange">Lock Weapons</button>
+        </div>
       </div>
 
-      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-        <button class="lcars-btn lcars-red lcars-blink-fast">Red Alert</button>
-        <button class="lcars-btn lcars-gold">Yellow Alert</button>
-        <button class="lcars-btn lcars-orange">Engage</button>
-        <button class="lcars-btn lcars-blue">Hail</button>
-        <button class="lcars-btn lcars-lavender">Scan</button>
+      <!-- SCIENCE Screen -->
+      <div class="lcars-screen" id="screen-science">
+        <h1 class="lcars-title lcars-title--lg">Science</h1>
+        <p class="lcars-subtitle">Sensor Analysis & Research</p>
+
+        <div class="lcars-kpi">
+          <div class="lcars-panel">
+            <h3 class="lcars-panel__title">Stellar Cartography</h3>
+            <p class="lcars-panel__value">SEC 001</p>
+            <p class="lcars-panel__status lcars-panel__status--ok">MAPPED</p>
+          </div>
+          <div class="lcars-panel">
+            <h3 class="lcars-panel__title">Anomalies</h3>
+            <p class="lcars-panel__value">0</p>
+            <p class="lcars-panel__status lcars-panel__status--ok">NONE DETECTED</p>
+          </div>
+        </div>
+
+        <div class="lcars-panel" style="flex:1;">
+          <h3 class="lcars-panel__title">Sensor Log</h3>
+          <div class="lcars-log-entry"><span class="lcars-log-time">14:32</span><span class="lcars-log-msg">Spectral analysis of nebula NGC-4725 complete</span></div>
+          <div class="lcars-log-entry"><span class="lcars-log-time">14:18</span><span class="lcars-log-msg">Subspace field variance within normal parameters</span></div>
+          <div class="lcars-log-entry"><span class="lcars-log-time">13:55</span><span class="lcars-log-msg">Class M planet detected — bearing 142 mark 7</span></div>
+          <div class="lcars-log-entry"><span class="lcars-log-time">13:40</span><span class="lcars-log-msg">Long range sensor sweep initiated — Sector 001</span></div>
+        </div>
+
+        <div style="display:flex; gap:12px;">
+          <button class="lcars-btn lcars-blue">Full Scan</button>
+          <button class="lcars-btn lcars-lavender">Probe Launch</button>
+        </div>
       </div>
+
+      <!-- ENGINEERING Screen -->
+      <div class="lcars-screen" id="screen-engineering">
+        <h1 class="lcars-title lcars-title--lg">Engineering</h1>
+        <p class="lcars-subtitle">Propulsion & Power Systems</p>
+
+        <div class="lcars-kpi">
+          <div class="lcars-panel">
+            <h3 class="lcars-panel__title">Warp Core</h3>
+            <p class="lcars-panel__value">1,247.8</p>
+            <p class="lcars-panel__status lcars-panel__status--ok">ONLINE</p>
+          </div>
+          <div class="lcars-panel">
+            <h3 class="lcars-panel__title">Impulse</h3>
+            <p class="lcars-panel__value">FULL</p>
+            <p class="lcars-panel__status lcars-panel__status--ok">READY</p>
+          </div>
+          <div class="lcars-panel">
+            <h3 class="lcars-panel__title">Dilithium</h3>
+            <p class="lcars-panel__value">94.2%</p>
+            <p class="lcars-panel__status lcars-panel__status--ok">CRYSTAL MATRIX ALIGNED</p>
+          </div>
+        </div>
+
+        <div class="lcars-panel" style="flex:1;">
+          <h3 class="lcars-panel__title">Power Distribution</h3>
+          <div class="lcars-data-row"><span class="lcars-data-row__label">EPS Grid</span><span class="lcars-data-row__value lcars-text-green">NOMINAL</span></div>
+          <div class="lcars-data-row"><span class="lcars-data-row__label">Antimatter Containment</span><span class="lcars-data-row__value lcars-text-green">STABLE</span></div>
+          <div class="lcars-data-row"><span class="lcars-data-row__label">Warp Field Geometry</span><span class="lcars-data-row__value lcars-text-green">SYMMETRIC</span></div>
+          <div class="lcars-data-row"><span class="lcars-data-row__label">Coolant System</span><span class="lcars-data-row__value lcars-text-green">CIRCULATING</span></div>
+          <div class="lcars-data-row"><span class="lcars-data-row__label">Fusion Reactors</span><span class="lcars-data-row__value lcars-text-green">4/4 ONLINE</span></div>
+        </div>
+
+        <div class="lcars-text-bar lcars-orange">
+          <span>WARP CAPABILITY: MAXIMUM WARP 9.6 — SUSTAINABLE CRUISE WARP 6</span>
+        </div>
+      </div>
+
+      <!-- MEDICAL Screen -->
+      <div class="lcars-screen" id="screen-medical">
+        <h1 class="lcars-title lcars-title--lg">Medical</h1>
+        <p class="lcars-subtitle">Sickbay & Crew Health</p>
+
+        <div class="lcars-kpi">
+          <div class="lcars-panel">
+            <h3 class="lcars-panel__title">Crew Health</h3>
+            <p class="lcars-panel__value">1,012</p>
+            <p class="lcars-panel__status lcars-panel__status--ok">FIT FOR DUTY</p>
+          </div>
+          <div class="lcars-panel">
+            <h3 class="lcars-panel__title">Sickbay</h3>
+            <p class="lcars-panel__value">2</p>
+            <p class="lcars-panel__status lcars-panel__status--warn">PATIENTS</p>
+          </div>
+          <div class="lcars-panel">
+            <h3 class="lcars-panel__title">Biobeds</h3>
+            <p class="lcars-panel__value">22/24</p>
+            <p class="lcars-panel__status lcars-panel__status--ok">AVAILABLE</p>
+          </div>
+        </div>
+
+        <div class="lcars-panel" style="flex:1;">
+          <h3 class="lcars-panel__title">Medical Log</h3>
+          <div class="lcars-log-entry"><span class="lcars-log-time">14:45</span><span class="lcars-log-msg">Routine physicals — Deck 7 crew rotation complete</span></div>
+          <div class="lcars-log-entry"><span class="lcars-log-time">13:20</span><span class="lcars-log-msg">Lt. Barclay — follow-up: transporter phobia therapy</span></div>
+          <div class="lcars-log-entry"><span class="lcars-log-time">11:05</span><span class="lcars-log-msg">Medical supplies restocked from Starbase 74</span></div>
+        </div>
+
+        <div class="lcars-alert lcars-alert--blue">No active medical emergencies.</div>
+      </div>
+
     </div>
 
     <!-- Bottom-Left Elbow -->
@@ -102,11 +273,17 @@
     function setEra(era) {
       document.documentElement.setAttribute('data-era', era);
       const ship = ships[era];
-      document.querySelector('.lcars-title--xl').textContent = 'LCARS INTERFACE';
-      document.querySelector('.lcars-subtitle').textContent =
-        `Library Computer Access / Retrieval System • ${ship.reg} • Stardate ${ship.stardate}`;
-      document.querySelector('.lcars-text-bar span').textContent =
-        `${ship.name} ${ship.reg} • ${ship.class} • Crew Complement: ${ship.crew}`;
+      document.querySelector('.ship-reg').textContent = ship.reg;
+      document.querySelector('.ship-stardate').textContent = ship.stardate;
+      document.querySelector('.ship-info').textContent =
+        `${ship.name} ${ship.reg} • ${ship.class} • CREW: ${ship.crew}`;
+    }
+
+    function showScreen(id) {
+      document.querySelectorAll('.lcars-screen').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.lcars-sidebar-seg').forEach(s => s.classList.remove('active'));
+      document.getElementById('screen-' + id).classList.add('active');
+      event.currentTarget.classList.add('active');
     }
   </script>
 </body>
