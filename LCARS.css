@@ -247,15 +247,15 @@ body {
 /* === BOTTOM BAR === */
 .lcars-bottombar .lcars-bar {
   height: var(--lcars-bar-height);
-  align-self: flex-end;
 }
 
-/* First bar connects to elbow - full height */
+/* First bar connects to elbow - full height, text pinned to bottom */
 .lcars-bottombar .lcars-bar:first-child {
   height: 120px;
   align-self: stretch;
   display: flex;
   align-items: flex-end;
+  padding-bottom: 8px;
 }
 
 /* === BAR SEGMENTS === */
